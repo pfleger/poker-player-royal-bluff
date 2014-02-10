@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+tomcatRun {
+    contextPath = '/'
+}
+
 buildscript {
     repositories {
         jcenter()
