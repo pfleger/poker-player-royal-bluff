@@ -13,6 +13,11 @@ tomcatRun {
     contextPath = '/'
 }
 
+tomcatStop {
+    stopPort = 8081
+    stopKey = 'stopKey'
+}
+
 buildscript {
     repositories {
         jcenter()

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# TODO kill tomcat
-#./boot.sh
+./gradlew tomcatStop
+./boot.sh
