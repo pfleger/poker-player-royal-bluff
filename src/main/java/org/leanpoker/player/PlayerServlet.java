@@ -25,5 +25,8 @@ public class PlayerServlet extends HttpServlet {
             resp.getWriter().print(Player.betRequest(new JsonParser().parse(gameState)));
 
         }
+        if (req.getParameter("action").equals("shutdown")) {
+            System.exit(1);
+        }
     }
 }

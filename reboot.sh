@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# TODO kill tomcat
-#./boot.sh
+./stop.sh
+./boot.sh
