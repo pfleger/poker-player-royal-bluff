@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./gradlew tomcatStop
+./stop.sh
 ./boot.sh
