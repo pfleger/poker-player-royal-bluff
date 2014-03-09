@@ -6,16 +6,10 @@ import java.util.Map;
 
 public class Player {
 
+    static final String VERSION = "Default Java folding player";
+
     public static int betRequest(JsonElement request) {
-
-        for (Map.Entry<String, JsonElement> entry : request.getAsJsonObject().entrySet()) {
-
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-
-        }
-
         return 0;
-
     }
 
     public static void showdown(JsonElement game) {
