@@ -9,12 +9,19 @@ repositories {
     mavenCentral()
 }
 
+// change this by n*100 to offset the ports of the tomcat server
+// don't forget to change the port accordingly in config.yml too!
+def portOffset = 0
+
 tomcatRun {
+	httpPort = 8080 + portOffset
+	ajpPort = 8009 + portOffset
+	stopPort = 8081 + portOffset
     contextPath = '/'
 }
 
 tomcatStop {
-    stopPort = 8081
+    stopPort = 8081 + portOffset
     stopKey = 'stopKey'
 }
 
