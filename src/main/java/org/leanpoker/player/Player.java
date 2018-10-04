@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 
 public class Player {
 
-    static final String VERSION = "1 million play";
+    static final String VERSION = "0.2";
 
     public static int betRequest(JsonElement request) {
         log("betRequest", request);
