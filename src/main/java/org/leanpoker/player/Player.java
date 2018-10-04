@@ -70,6 +70,24 @@ public class Player {
         return 10;
     }
 
+    private static int betStrategy4(GameState gameState) {
+        Optional<PlayerData> we =
+                gameState.getPlayers().stream().filter(e -> e.getName().equals(OUR_NAME)).findFirst();
+        if (we.isPresent()) {
+            if (otherAllIn(gameState)) {
+                return FOLD_VALUE;
+            }
+
+            PlayerData weData = we.get();
+            List<Card> cards = weData.getHoleCards();
+            cards.sort(new ReverseCardRankComparator());
+            if (isPair(cards) || isTwoGreaterThan(cards, "10")) {
+                return ALL_IN;
+            };
+        }
+        return 10;
+    }
+
     private static boolean otherAllIn(GameState gameState) {
         int ourIndex = gameState.getInAction();
         long numberOfAllInPlayers = gameState.getPlayers().stream().filter(e -> {
