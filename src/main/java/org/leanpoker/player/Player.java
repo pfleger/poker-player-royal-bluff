@@ -2,6 +2,9 @@ package org.leanpoker.player;
 
 import com.google.gson.JsonElement;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class Player {
@@ -13,9 +16,6 @@ public class Player {
 
     public static int betRequest(JsonElement request) {
         log("betRequest", request);
-//        JsonArray players = request.getAsJsonObject().getAsJsonArray("players");
-//        int current_buy_in = getAsInt(request, "current_buy_in");
-//        int pot = getAsInt(request, "pot");
 
         GameState gameState = new GameState(request);
         System.out.println(">>>>>>> GameState: " + gameState.toString());
@@ -32,7 +32,8 @@ public class Player {
                 gameState.getPlayers().stream().filter(e -> e.getName().equals(OUR_NAME)).findFirst();
         if (we.isPresent()) {
             PlayerData weData = we.get();
-            Card[] cards = weData.getHoleCards().toArray(new Card[0]);
+            List<Card> cards = weData.getHoleCards();
+            cards.sort(new ReverseCardRankComparator());
             if (isPair(cards) || isTwoGreaterThan(cards, "10")) {
                 return ALL_IN;
             };
@@ -40,7 +41,19 @@ public class Player {
         return 10;
     }
 
-    private static boolean isTwoGreaterThan(Card[] cards, String rank ) {
+    private static boolean isOneGreaterThan(List<Card> cards, String rank ) {
+        boolean twoGreaterThan = false;
+        boolean oneGreaterThan = false;
+        for (Card card: cards        ) {
+            if (card.getRank().equals("10") || card.getRank().equals("J")|| card.getRank().equals("Q")|| card.getRank().equals("K")|| card.getRank().equals("A")) {
+               return true;
+            }
+        }
+        return twoGreaterThan;
+    }
+
+
+    private static boolean isTwoGreaterThan(List<Card> cards, String rank ) {
         boolean twoGreaterThan = false;
         boolean oneGreaterThan = false;
         for (Card card: cards        ) {
@@ -55,10 +68,10 @@ public class Player {
         return twoGreaterThan;
     }
 
-    private static boolean isPair(Card[] cards) {
-        if (cards.length == 2) {
-            Card card1 = cards[0];
-            Card card2 = cards[1];
+    private static boolean isPair(List<Card> cards) {
+        if (cards.size() == 2) {
+            Card card1 = cards.get(0);
+            Card card2 = cards.get(1);
             return isPair(card1, card2);
         }
         return false;
