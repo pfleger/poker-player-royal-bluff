@@ -18,7 +18,7 @@ public class Player {
         GameState gameState = new GameState(request);
         System.out.println(">>>>>>> GameState: " + gameState.toString());
 
-        game
+//        game
 
         return 1000000;
     }
