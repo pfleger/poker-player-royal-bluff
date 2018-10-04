@@ -42,6 +42,12 @@ public class GameState {
         pot = getAsInt(request, "pot");
         inAction = getAsInt(request,"in_action");
 
+        JsonArray jsonCommunityCards = request.getAsJsonObject().getAsJsonArray("community_cards");
+        communityCards = new ArrayList<>();
+        jsonCommunityCards.forEach(e-> {
+            Card card = new Card(e);
+            communityCards.add(card);
+        });
 
     }
 
