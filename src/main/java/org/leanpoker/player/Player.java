@@ -29,7 +29,6 @@ public class Player {
                 return ALL_IN;
             };
         }
-
         return 10;
     }
 
