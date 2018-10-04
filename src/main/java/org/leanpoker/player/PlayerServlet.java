@@ -12,7 +12,6 @@ import java.io.IOException;
 @WebServlet("/")
 public class PlayerServlet extends HttpServlet {
 
-    private String strategy = "2";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,15 +19,14 @@ public class PlayerServlet extends HttpServlet {
 
         String strategy = req.getParameter("strategy");
         if (strategy != null) {
-            this.strategy = strategy;
             Player.strategy = strategy;
         }
-        resp.getWriter().println("Strategy :" + this.strategy + " gesetzt");
+        resp.getWriter().println("Strategy :" + Player.strategy + " gesetzt");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(">>>> Strategy: " + strategy + " --- Request: " + req.getRequestURI() + " ---- " + req.getRequestURL().toString());
+        System.out.println(">>>> Strategy: " + Player.strategy + " --- Request: " + req.getRequestURI() + " ---- " + req.getRequestURL().toString());
 
         if (req.getParameter("action").equals("bet_request")) {
             String gameState = req.getParameter("game_state");
