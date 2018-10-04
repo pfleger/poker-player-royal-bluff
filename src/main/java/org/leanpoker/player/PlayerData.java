@@ -1,6 +1,10 @@
 package org.leanpoker.player;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerData {
 
@@ -8,6 +12,7 @@ public class PlayerData {
     int stack;
     String status;
     int bet;
+    List<Card> holeCards;
 
     String version;
     int id;
@@ -15,6 +20,15 @@ public class PlayerData {
     public PlayerData(JsonElement from) {
         stack = getAsInt(from, "stack");
         name = getAsString(from, "name");
+
+
+        JsonArray jsonHoleCards = from.getAsJsonObject().getAsJsonArray("hole_cards");
+        holeCards = new ArrayList<>();
+        jsonHoleCards.forEach(e-> {
+            Card card = new Card(e);
+            holeCards.add(card);
+        });
+
     }
 
 
