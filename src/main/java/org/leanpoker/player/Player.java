@@ -20,6 +20,14 @@ public class Player {
         GameState gameState = new GameState(request);
         System.out.println(">>>>>>> GameState: " + gameState.toString());
 
+        return betStrategy2(gameState);
+    }
+
+    private static int betStrategy1(GameState gameState) {
+        return ALL_IN;
+    }
+
+    private static int betStrategy2(GameState gameState) {
         Optional<PlayerData> we =
                 gameState.getPlayers().stream().filter(e -> e.getName().equals(OUR_NAME)).findFirst();
         if (we.isPresent()) {
@@ -33,13 +41,18 @@ public class Player {
     }
 
     private static boolean isGreaterThan(Card[] cards, String rank ) {
+        boolean twoGreaterThan = false;
+        boolean oneGreaterThan = false;
         for (Card card: cards        ) {
             if (card.getRank().equals("10") || card.getRank().equals("J")|| card.getRank().equals("Q")|| card.getRank().equals("K")|| card.getRank().equals("A")) {
-
-                return true;
+                if (oneGreaterThan) {
+                    twoGreaterThan = true;
+                } else {
+                    oneGreaterThan = true;
+                }
             }
         }
-        return false;
+        return twoGreaterThan;
     }
 
     private static boolean isPair(Card[] cards) {

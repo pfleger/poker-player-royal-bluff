@@ -12,8 +12,6 @@ public class Card {
 //    public static final String SUIT_HEARTS = "hearts";
 
 
-
-
     public Card(JsonElement from) {
         rank = JsonHelper.getAsString(from, "rank");
         suit = JsonHelper.getAsString(from, "suit");
