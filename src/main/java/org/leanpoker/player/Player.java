@@ -19,7 +19,7 @@ public class Player {
         GameState gameState = new GameState(request);
         System.out.println(">>>>>>> GameState: " + gameState.toString());
 
-        return betStrategy3(gameState);
+        return betStrategy2(gameState);
     }
 
     private static int betStrategy1(GameState gameState) {
