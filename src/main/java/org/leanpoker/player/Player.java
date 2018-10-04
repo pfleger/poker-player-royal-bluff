@@ -33,14 +33,14 @@ public class Player {
         if (we.isPresent()) {
             PlayerData weData = we.get();
             Card[] cards = weData.getHoleCards().toArray(new Card[0]);
-            if (isPair(cards) || isGreaterThan(cards, "10")) {
+            if (isPair(cards) || isTwoGreaterThan(cards, "10")) {
                 return ALL_IN;
             };
         }
         return 10;
     }
 
-    private static boolean isGreaterThan(Card[] cards, String rank ) {
+    private static boolean isTwoGreaterThan(Card[] cards, String rank ) {
         boolean twoGreaterThan = false;
         boolean oneGreaterThan = false;
         for (Card card: cards        ) {
