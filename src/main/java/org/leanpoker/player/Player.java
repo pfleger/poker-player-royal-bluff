@@ -2,6 +2,8 @@ package org.leanpoker.player;
 
 import com.google.gson.JsonElement;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,12 +80,24 @@ public class Player {
             }
 
             PlayerData weData = we.get();
-            List<Card> cards = weData.getHoleCards();
-            cards.sort(new ReverseCardRankComparator());
-            if (isPair(cards) || isTwoGreaterThan(cards, "10")) {
+            List<Card> ourCards = weData.getHoleCards();
+            List<Card> allCards = new ArrayList<>(ourCards);
+            allCards.addAll(gameState.getCommunityCards());
+            ourCards.sort(new ReverseCardRankComparator());
+
+            if (isPair(ourCards) || isTwoGreaterThan(ourCards, "10")) {
                 return ALL_IN;
-            };
+            } else if (isPair(ourCards, gameState.getCommunityCards())) {
+                return ALL_IN;
+            } else if (gameState.getRound() < 3) {
+                return getCallValue(gameState);
+            } else {
+                return FOLD_VALUE;
+            }
+
         }
+
+        System.out.println("Last call value");
         return getCallValue(gameState);
     }
 
@@ -143,6 +157,16 @@ public class Player {
 
     }
 
+    private static boolean isPair(Collection<Card> ourcards, Collection<Card> commonCards) {
+        boolean pair = false;
+        for (Card ourCard: ourcards             ) {
+            pair= commonCards.stream().anyMatch(e-> e.getRank().equals(ourCard.getRank()));
+            if (pair) {
+                return true;
+            }
+        }
+        return false;
+    }
     private static boolean isPair(Card card1, Card card2) {
         return card1.getRank().equals(card2.getRank());
     }
