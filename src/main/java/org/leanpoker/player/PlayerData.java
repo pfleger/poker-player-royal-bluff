@@ -75,4 +75,8 @@ public class PlayerData {
     public int getId() {
         return id;
     }
+
+    public List<Card> getHoleCards() {
+        return holeCards;
+    }
 }
