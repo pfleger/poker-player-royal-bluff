@@ -13,6 +13,9 @@ public class Player {
         int current_buy_in = getAsInt(request, "current_buy_in");
         int pot = getAsInt(request, "pot");
 
+        GameState gameState = new GameState(request);
+        System.out.println(">>>>>>> GameState: " + gameState.toString());
+
         return 1000000;
     }
 
