@@ -25,12 +25,22 @@ public class Player {
         if (we.isPresent()) {
             PlayerData weData = we.get();
             Card[] cards = weData.getHoleCards().toArray(new Card[0]);
-            if (isPair(cards)) {
+            if (isPair(cards) || isGreaterThan(cards, "10")) {
                 return ALL_IN;
             };
         }
 
         return 10;
+    }
+
+    private static boolean isGreaterThan(Card[] cards, String rank ) {
+        for (Card card: cards        ) {
+            if (card.getRank().equals("10") || card.getRank().equals("J")|| card.getRank().equals("Q")|| card.getRank().equals("K")|| card.getRank().equals("A")) {
+
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isPair(Card[] cards) {
