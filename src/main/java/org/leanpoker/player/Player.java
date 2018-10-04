@@ -8,12 +8,16 @@ public class Player {
     static final String VERSION = "Default Java folding player";
 
     public static int betRequest(JsonElement request) {
-
+        log("betRequest", request);
         JsonArray players = request.getAsJsonObject().getAsJsonArray("players");
         int current_buy_in = getAsInt(request, "current_buy_in");
         int pot = getAsInt(request, "pot");
 
         return 1000;
+    }
+    
+    private static void log(String type, JsonElement request){
+        System.out.println("Type: " + type + " JsonElement: " + request.toString());
     }
 
     private static int getAsInt(JsonElement request, String current_buy_in1) {
@@ -25,5 +29,6 @@ public class Player {
     }
 
     public static void showdown(JsonElement game) {
+        log("showdown", game);
     }
 }
