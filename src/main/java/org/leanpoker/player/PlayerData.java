@@ -20,7 +20,7 @@ public class PlayerData {
     public PlayerData(JsonElement from) {
         stack = getAsInt(from, "stack");
         name = getAsString(from, "name");
-
+        status = getAsString(from, "status");
 
         JsonArray jsonHoleCards = from.getAsJsonObject().getAsJsonArray("hole_cards");
         holeCards = new ArrayList<>();
