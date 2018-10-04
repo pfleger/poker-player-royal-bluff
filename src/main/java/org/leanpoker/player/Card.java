@@ -9,7 +9,7 @@ public class Card {
     public static final String SUIT_HEARTS = "hearts";
     public static final String SUIT_SPADES = "spades";
     public static final String SUIT_CLUBS = "clubs";
-//    public static final String SUIT_HEARTS = "hearts";
+    public static final String SUIT_DIAMONDS = "diamonds";
 
 
     public Card(JsonElement from) {

@@ -2,8 +2,6 @@ package org.leanpoker.player;
 
 import com.google.gson.JsonElement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +11,7 @@ public class Player {
 
     static final String VERSION = "0.2";
     public static final int ALL_IN = 1000000;
+    public static final int FOLD_VALUE = 0;
 
     public static int betRequest(JsonElement request) {
         log("betRequest", request);
@@ -20,7 +19,7 @@ public class Player {
         GameState gameState = new GameState(request);
         System.out.println(">>>>>>> GameState: " + gameState.toString());
 
-        return betStrategy2(gameState);
+        return betStrategy3(gameState);
     }
 
     private static int betStrategy1(GameState gameState) {
@@ -39,6 +38,35 @@ public class Player {
             };
         }
         return 10;
+    }
+
+    private static int betStrategy3(GameState gameState) {
+        Optional<PlayerData> we =
+                gameState.getPlayers().stream().filter(e -> e.getName().equals(OUR_NAME)).findFirst();
+        if (we.isPresent()) {
+            if (otherAllIn(gameState)) {
+                return FOLD_VALUE;
+            }
+
+            PlayerData weData = we.get();
+            List<Card> cards = weData.getHoleCards();
+            cards.sort(new ReverseCardRankComparator());
+            if (isPair(cards) || isTwoGreaterThan(cards, "10")) {
+                return ALL_IN;
+            };
+        }
+        return 10;
+    }
+
+    private static boolean otherAllIn(GameState gameState) {
+        int ourIndex = gameState.getInAction();
+        long numberOfAllInPlayers = gameState.getPlayers().stream().filter(e -> {
+            return e.getStatus().equals("active") && e.getStack() == 0;
+        }).count();
+        if (numberOfAllInPlayers> 1) {
+            return true;
+        }
+        return false;
     }
 
     private static boolean isOneGreaterThan(List<Card> cards, String rank ) {
