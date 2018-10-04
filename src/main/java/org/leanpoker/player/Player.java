@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 
 public class Player {
 
-    static final String VERSION = "Default Java folding player";
+    static final String VERSION = "1 million play";
 
     public static int betRequest(JsonElement request) {
         log("betRequest", request);
@@ -13,9 +13,9 @@ public class Player {
         int current_buy_in = getAsInt(request, "current_buy_in");
         int pot = getAsInt(request, "pot");
 
-        return 1000;
+        return 1000000;
     }
-    
+
     private static void log(String type, JsonElement request){
         System.out.println("Type: " + type + " JsonElement: " + request.toString());
     }
