@@ -22,12 +22,12 @@ public class PlayerData {
         name = getAsString(from, "name");
 
 
-        JsonArray jsonHoleCards = from.getAsJsonObject().getAsJsonArray("hole_cards");
+//        JsonArray jsonHoleCards = from.getAsJsonObject().getAsJsonArray("hole_cards");
         holeCards = new ArrayList<>();
-        jsonHoleCards.forEach(e-> {
-            Card card = new Card(e);
-            holeCards.add(card);
-        });
+//        jsonHoleCards.forEach(e-> {
+//            Card card = new Card(e);
+//            holeCards.add(card);
+//        });
 
     }
 
