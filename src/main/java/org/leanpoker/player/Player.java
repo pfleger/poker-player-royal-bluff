@@ -71,8 +71,7 @@ public class Player {
     }
 
     private static int betStrategy4(GameState gameState) {
-        Optional<PlayerData> we =
-                gameState.getPlayers().stream().filter(e -> e.getName().equals(OUR_NAME)).findFirst();
+        Optional<PlayerData> we = findUs(gameState);
         if (we.isPresent()) {
             if (otherAllIn(gameState)) {
                 return FOLD_VALUE;
@@ -85,7 +84,15 @@ public class Player {
                 return ALL_IN;
             };
         }
-        return 10;
+        return getCallValue(gameState);
+    }
+
+    private static Optional<PlayerData> findUs(GameState gameState) {
+        return gameState.getPlayers().stream().filter(e -> e.getName().equals(OUR_NAME)).findFirst();
+    }
+
+    private static int getCallValue(GameState gameState) {
+        return gameState.getCurrentBuy() - gameState.getPlayers().get(gameState.getInAction()).getBet();
     }
 
     private static boolean otherAllIn(GameState gameState) {
