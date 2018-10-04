@@ -47,7 +47,7 @@ public class PlayerData {
     @Override
     public String toString() {
         return "PlayerData{" + "name='" + name + '\'' + ", stack=" + stack + ", status='" + status + '\'' + ", bet=" +
-                bet + ", version='" + version + '\'' + ", id=" + id + '}';
+                bet + ", holeCards=" + holeCards + ", version='" + version + '\'' + ", id=" + id + '}';
     }
 
     public String getName() {

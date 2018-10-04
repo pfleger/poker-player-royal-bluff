@@ -21,6 +21,14 @@ public class GameState {
     int pot;
     List<PlayerData> players;
 
+    @Override
+    public String toString() {
+        return "GameState{" + "tournamentId='" + tournamentId + '\'' + ", gameId='" + gameId + '\'' + ", round=" +
+                round + ", betIndex=" + betIndex + ", smallBlind=" + smallBlind + ", orbits=" + orbits + ", inAction=" +
+                inAction + ", dealer=" + dealer + ", communityCards=" + communityCards + ", currentBuy=" + currentBuy +
+                ", pot=" + pot + ", players=" + players + '}';
+    }
+
     public GameState(JsonElement request) {
 
 
@@ -63,14 +71,6 @@ public class GameState {
 
     private static JsonElement getJsonElement(JsonElement request, String current_buy_in1) {
         return request.getAsJsonObject().get(current_buy_in1);
-    }
-
-    @Override
-    public String toString() {
-        return "GameState{" + "tournamentId='" + tournamentId + '\'' + ", gameId='" + gameId + '\'' + ", round=" +
-                round + ", betIndex=" + betIndex + ", smallBlind=" + smallBlind + ", orbits=" + orbits + ", inAction=" +
-                inAction + ", dealer=" + dealer + ", communityCards=" + communityCards + ", currentBuy=" + currentBuy +
-                ", pot=" + pot + ", players=" + players + '}';
     }
 
     public String getTournamentId() {
