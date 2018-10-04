@@ -14,7 +14,7 @@ public class Player {
     static final String VERSION = "0.2";
     public static final int ALL_IN = 1000000;
     public static final int FOLD_VALUE = 0;
-    public static String strategy = "2";
+    public static String strategy = "4";
 
     public static int betRequest(JsonElement request) {
         log("betRequest", request);
@@ -29,6 +29,8 @@ public class Player {
                 return betStrategy2(gameState);
             case "3":
                 return betStrategy3(gameState);
+            case "4":
+                return betStrategy4(gameState);
             default:
                 return betStrategy2(gameState);
 
